@@ -15,6 +15,8 @@ Promise.resolve()
 // ROUTES
 app.get('/films/:id/recommendations', getFilmRecommendations);
 
+
+
 // ROUTE HANDLER
 function getFilmRecommendations(req, res) {
 
@@ -26,8 +28,6 @@ function getFilmRecommendations(req, res) {
   }).then(function(film){
     var genreID = film[0].genre_id;
     var releaseYear = parseInt(film[0].release_date.substring(0,4));
-    // var releaseDate = film[0].release_date;
-    // var releaseYear = parseInt(releaseDate.substring(0,4));
     var fifteenYearsBefore = (releaseYear - 15);
     var fifteenYearsAfter = (releaseYear + 15);
     var recommendedFilms = [];

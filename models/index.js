@@ -5,7 +5,7 @@ const fs = require('fs'),
 
 var db = {};
 var modelPath = path.join(__dirname + '/../models');
-var sequelize = new Sequelize( {
+var sequelize = new Sequelize({
   host: 'localhost',
   dialect: 'sqlite',
   storage: './db/database.db'
