@@ -2,7 +2,7 @@ module.exports = function(sequelize, DataTypes) {
 
   var Film = sequelize.define('Films', {
     title: DataTypes.STRING,
-    release_date: DataTypes.DATE,
+    release_date: DataTypes.INTEGER,
     tagline: DataTypes.STRING,
     revenue: DataTypes.INTEGER,
     budget: DataTypes.INTEGER,

@@ -17,19 +17,39 @@ app.get('/films/:id/recommendations', getFilmRecommendations);
 
 // ROUTE HANDLER
 function getFilmRecommendations(req, res) {
+
   db.Films.findAll({
     where: {
       id: req.params.id
     }
+
   }).then(function(film){
-    genreID = film[0].genre_id;
+    var genreID = film[0].genre_id;
+    var releaseYear = parseInt(film[0].release_date.substring(0,4));
+    // var releaseDate = film[0].release_date;
+    // var releaseYear = parseInt(releaseDate.substring(0,4));
+    var fifteenYearsBefore = (releaseYear - 15);
+    var fifteenYearsAfter = (releaseYear + 15);
+    var recommendedFilms = [];
+
     db.Films.findAll({
       where: {
         genre_id: genreID
       }
-    }).then(function(recommendedFilms){
+
+    }).then(function(selectedFilms){
+
+      for (var i = 0; i < selectedFilms.length; i++){
+        var grabYear = parseInt(selectedFilms[i].release_date.substring(0, 4));
+        if (grabYear <= fifteenYearsAfter && grabYear >= fifteenYearsBefore){
+          recommendedFilms.push(selectedFilms[i]);
+        }
+      }
+
       res.json({'recommendations': recommendedFilms});
+
     })
+
   })
 }
 
