@@ -22,7 +22,14 @@ function getFilmRecommendations(req, res) {
       id: req.params.id
     }
   }).then(function(film){
-    res.json(film);
+    genreID = film[0].genre_id;
+    db.Films.findAll({
+      where: {
+        genre_id: genreID
+      }
+    }).then(function(recommendedFilms){
+      res.json({'recommendations': recommendedFilms});
+    })
   })
 }
 
