@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 
-  var Film = sequelize.define('Films'. {
+  var Film = sequelize.define('Films', {
     title: DataTypes.STRING,
     release_date: DataTypes.DATE,
     tagline: DataTypes.STRING,
@@ -9,7 +9,9 @@ module.exports = function(sequelize, DataTypes) {
     runtime: DataTypes.INTEGER,
     original_language: DataTypes.STRING,
     status: DataTypes.STRING,
-    genre_id: DataTypes.INTEGER
+    genre_id: DataTypes.INTEGER,
+    createdAt: DataTypes.VIRTUAL,
+    updatedAt: DataTypes.VIRTUAL
   });
 
   return Film;

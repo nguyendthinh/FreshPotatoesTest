@@ -4,6 +4,7 @@ const sqlite = require('sqlite'),
       express = require('express'),
       app = express();
 
+var db = require('./models/index');
 const { PORT=3000, NODE_ENV='development', DB_PATH='./db/database.db' } = process.env;
 
 // START SERVER
@@ -16,7 +17,13 @@ app.get('/films/:id/recommendations', getFilmRecommendations);
 
 // ROUTE HANDLER
 function getFilmRecommendations(req, res) {
-  res.status(500).send('Not Implemented');
+  db.Films.findAll({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(film){
+    res.json(film);
+  })
 }
 
 module.exports = app;
